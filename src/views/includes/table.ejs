@@ -1,0 +1,73 @@
+<style>
+    table{
+    width: 100%;
+    height: 40px;
+    border: solid 1px black;
+    border-collapse: collapse;
+    text-align: center;
+    margin-bottom: 5%;
+    }
+    thead{
+    background-color: #3fad80;
+    color: #fff;
+    height: 40px;
+    }
+    tbody{
+    background-color: rgb(255, 255, 255);
+    }
+    td{
+    padding: 15px;
+    text-align: left;
+    }
+    tbody tr:nth-child(even){
+    background-color: rgb(230, 230, 230);
+    }
+
+    tbody tr:hover{
+    background-color: rgb(181, 228, 199);
+    color: #fff;
+    }
+
+    a:hover{
+        color: #fff;
+    }
+</style>
+
+
+
+
+
+
+<!-- TABELAS ADM -->
+
+<!-- CHAMADOS ATRIBUÍDOS À VOCÊ -->
+<table>
+    <thead>
+        <tr>
+            <th>Assunto</th>
+            <th>Solicitante</th>
+            <th>Data Abertura</th>
+            <th>STATUS</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% tb.forEach(ticket => { %>
+            <% if(ticket.idResponsavel === user._id) { %>
+                <tr>
+                <td>
+                    <a href="/chamadosAtivos/tk/<%= ticket._id %>" style="text-decoration: none;">
+                    <%= ticket.assunto %>
+                    </a>
+                </td>
+                <td><%= ticket.nomeSolicitante %></td>
+                <td><%= ticket.dataAbertura %></td>
+                <td><%= ticket.status %></td>
+                </tr>
+            <%  } %>
+        <%  }) %>
+
+
+      </tbody>
+</table>
+
+

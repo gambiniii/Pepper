@@ -1,0 +1,188 @@
+<%- include('includes/head') %>
+<%- include('includes/nav') %>
+<body>
+  <a 
+    style="color: rgb(58, 58, 58); margin-top: 1%; margin-left: 3%; position: absolute;" 
+    <% if(user.userType === 'admin') {%>
+    href="/chamadosADM"
+    <% } else { %>
+    href="/chamadosAtivos"
+    <% } %>  
+  >
+    <svg xmlns="http://www.w3.org/2000/svg" width="46" height="46" fill="currentColor" class="bi bi-arrow-left-short" viewBox="0 0 16 16">
+      <path fill-rule="evenodd" d="M12 8a.5.5 0 0 1-.5.5H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5a.5.5 0 0 1 .5.5z"/>
+    </svg>  
+  </a>
+  
+  <br>
+    <%- include('includes/messages') %>
+    <header style="margin-top: 1%;">
+      <div class="header container my-5 header-tk">
+        <% const ultimaAtt = ticket.atividade.length - 1 %>
+
+      <div class="row">
+        <div class="container">
+          <h5 style="font-style: italic;">Ticket nº :  <h5 style="font-size: 16px; margin-left: 2%;"><%= ticket._id %></h5> </h5>
+           <hr style="color: #fff; margin-bottom: 2%; margin-top: 0;">      
+        </div>
+        <div class="container">
+          <div class="row">
+            <div class="col-md-6">
+              <h6> Data de Abertura do chamado :   <%= ticket.dataAbertura %></h6>
+              <h6> Solicitante :   <%= ticket.nomeSolicitante %> </h6>         
+              <h6> Assunto :   <%= ticket.assunto %></h6>
+            </div>
+
+            <div class="col-md-6">
+              <h6> Última Atualização do chamado:    <%= ticket.atividade[ultimaAtt].dataPostagem %> </h6>
+
+              <% if(ticket.nomeResponsavel !== null) {%>
+                <h6> Responsável :   <%= ticket.nomeResponsavel %> </h6>   
+              <% } else {%>
+                <h6> Responsável : <b style="margin-left: 2%;">   ---</b> </h6>   
+              <% } %>
+  
+              <% if(ticket.status == 'Finalizado') { %>
+                <h6>
+                  STATUS : <b style="color: #53ad80;">FINALIZADO</b>
+                </h6>
+              <%} else if(ticket.status == 'Em análise'){%>
+                <h6 style="color: #fff;">
+                  STATUS : <b style="color: #e74740;">EM ANÁLISE</b>
+                </h6>
+              <%} else if(ticket.status == 'Em processamento'){%>
+                <h6 style="color: #fff;">
+                  STATUS : <b style="color: #e74740;">EM PROCESSAMENTO</b>
+                </h6>
+              <% } else { %>      
+                <h6 style="color: #fff;">
+                  STATUS : <b style="color: #53ad80;">RESOLVIDO</b>
+                </h6>
+              <% } %>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
+    </header>
+
+    <section>
+      <% for(tk in ticket.atividade) {%>
+      <div class="container my-5 header-andamento" style="padding: 0; border-top: 0;">
+        <div class="container header-atividade" style="width: 100.2%;">
+          <h6> Sequencial de Andamento :   <%= ticket.atividade[tk].idAndamento %> </h6>
+          <h6> Postado por <%= ticket.atividade[tk].nomeUser %> no dia <%= ticket.atividade[tk].dataPostagem %> </h6>
+        </div>
+        <p style="font-style: italic;
+          margin-top:0;
+          font-size: 12px;
+          color: #8a8a8a;">Descrição :
+        </p>
+        <p style="margin-left: 2%;font-family: sans-serif;"> <%= ticket.atividade[tk].descricao %> </p>
+      </div>
+      <% }; %>
+
+      <!-- CASO O CHAMADO AINDA NÃO TENHA UM RESPONSÁVEL-->
+      <% if (ticket.status === 'Em processamento') { %>
+        <% if(user.userType === 'admin') { %>
+          <% if(user._id !== ticket.idSolicitante) {%>
+          <div class="ticket-botoes" align="center">
+            <a href="/chamadosAtivos/updateStatus/<%= ticket._id %>/1">
+              <button type="button" class="btn btn-success btn-tkAdmin" style="margin-bottom: 2%;">Atender este Chamado</button>
+            </a>
+          </div>
+          <% } else { %>
+            <p style="color: red; text-align: center;">
+              Você não pode atender um chamado aberto por você mesmo!
+            </p>
+
+          <% } %>
+        
+        
+        <% } %>
+
+
+
+        <!-- CASO O CHAMADO AINDA ESTEJA EM ANÁLISE -->
+      <% } else if(ticket.status === 'Em análise') { %> 
+        <div class="container form-group mt-2" align="center">
+          <form action="/chamadosAtivos/tkUpdate/<%= ticket._id %>" method="POST">
+            <input type="hidden" name="_csrf" value="<%= csrfToken%>">
+            <label class="lead">Inserir um andamento</label>
+            <textarea class="description" rows="8" maxlength="1000" name="descricao"></textarea>
+  
+            <% if(user.userType === 'default'){ %>
+  
+              <button type="submit" class="btn btn-success" style="margin-bottom: 2%;">Inserir Andamento</button>
+  
+              <% } else {%>
+  
+              <div class="ticket-botoes">
+                <button type="submit" class="btn btn-success btn-tkAdmin" style="margin-bottom: 2%;">Inserir Andamento</button>
+                <a href="/chamadosAtivos/updateStatus/<%= ticket._id %>/3">
+                  <button type="button" class="btn btn-success btn-tkAdmin" style="margin-bottom: 2%;">Finalizar Chamado</button>
+                </a>
+              </div>
+            <% } %>
+  
+          </form>
+        </div>
+  
+      <!-- CASO O AGENTE TENHA MARCADO O CHAMADO COMO "RESOLVIDO" -->
+      <% } else if(ticket.status === 'Resolvido') { %>
+        <% if(user.userType === 'admin') {%>
+          <h5 align="center" style="margin-bottom: 3%;">
+            Chamado Resolvido pelo agente
+            <hr style="width: 20%; margin-left: 40%;">
+          </h5>
+  
+          <div class="ticket-botoes" align="center">
+            <a href="/chamadosAtivos/updateStatus/<%= ticket._id %>/2">
+            <button type="button" class="btn btn-success btn-tkAdmin" style="margin-bottom: 2%;">Reabrir Chamado</button>
+          </a>
+        </div>
+        <% } else { %>
+          <div align="center" style="margin-bottom: 2%;">
+            <h5>Este chamado foi Resolvido pelo agente!</h5>
+            <p style="font-size: 14px; margin-bottom: 0;">Você está satisfeito com a solução dada pelo agente?</p>
+            <hr style="width: 20%; margin-top: 0; margin-bottom: 3%;">  
+
+            <a style="text-decoration: none;" href="/chamadosAtivos/updateStatus/<%= ticket._id %>/2">
+              <button type="button" class="btn btn-danger btn-tkAdmin" style="margin-bottom: 2%;">Não (Reabrir chamado)</button>
+            </a>
+            <a style="text-decoration: none;" href="/chamadosAtivos/updateStatus/<%= ticket._id %>/4">
+              <button type="button" class="btn btn-success btn-tkAdmin" style="margin-bottom: 2%;">Sim (Finalizar chamado)</button>
+            </a>
+    
+          
+          </div>
+
+        <% } %>
+
+
+
+      <!-- CASO O USUÁRIO ESTEJA SATISFEITO COM A SOLUÇÃO APLCIADA AO CHAMADO -->
+      <% } else if(ticket.status === 'Finalizado') { %>
+        <% if(user.userType === 'default') {%>
+        <div align="center" style="margin-bottom: 2%;">
+          <h5>Este chamado foi Finalizado!</h5>
+          <p style="font-size: 14px; margin-bottom: 0;">Você não pode mais inserir andamentos aqui.... Caso ainda esteja com problemas, por favor, abra outro chamado em nosso sistema</p>
+        </div>
+        <% } else { %>
+          <div align="center" style="margin-bottom: 2%;">
+            <h5>Este chamado foi Finalizado!</h5>
+            <p style="font-size: 14px; margin-bottom: 0;">Você não pode mais inserir andamentos aqui.... </p>
+          </div>
+
+        <% } %>
+
+      <% } %>
+
+
+    </section>
+    
+
+  </section>
+
+
+  <%- include('includes/footer') %>

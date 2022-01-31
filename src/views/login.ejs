@@ -1,0 +1,31 @@
+<%- include('includes/head') %>
+<%- include('includes/nav') %>
+<body>
+  <section class="container my-5">
+    <h1 class="lead" style="font-size: 2.25rem; text-align: center;">
+      Inicie sua sessão
+    </h1>
+    <hr class="container" style="width: 25%; margin-top: 0; border: 0;">
+    <%- include('includes/messages') %>
+
+    
+    <div class="container my-4" style="width: 40%;">
+      <form action="/login/login" method="POST" class="form-login">
+        <input type="hidden" name="_csrf" value="<%= csrfToken%>">
+        <div class="form-group mt-2">
+          <label class="lead">E-mail</label>
+          <input type="email" class="formulario lead" placeholder="Seu endereco de e-mail" name="email">
+        </div>
+        <div class="form-group mt-2">
+          <label class="lead">Senha</label>
+          <input type="password" class="formulario lead" placeholder="Senha" name="password">
+        </div>
+        <button type="submit" class="btn btn-success">Entrar</button>
+      </form>
+
+    </div>
+
+    
+  </section>
+
+  <%- include('includes/footer') %>

@@ -1,0 +1,103 @@
+<header class="p-3 bg-dark text-white">
+    <div class="container">
+      <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start" style="width: 110%;">
+        <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
+            <img style="width: 100px; position: absolute; left: 10px;" src="https://images.vexels.com/media/users/3/236746/isolated/lists/4691ac3565ddf36c551c64017d97d343-frutas-e-vegetais-cor-3.png" alt="pimenta">
+        </a>
+
+          <% if(user && user.userType === 'default') {%>
+            <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle px-2 text-white" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Chamados
+              </a>
+              <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
+                <li><a href="/chamadosAtivos" class="dropdown-item nav-link px-2 text-white">Meus Chamados</a></li>
+                <li><a href="/chamados" class="dropdown-item nav-link px-2 text-white">Abrir chamado</a></li>
+              </ul>
+            </li>
+
+            <li><a href="#" class="nav-link px-2 text-white">Ajuda</a></li>
+
+          </ul>
+
+          <div class="text-end">
+            <button type="button" class="btn btn-outline-light me-2 disabled">Perfil</button>
+            <a href="/login/logout"><button type="button" class="btn btn-outline-light me-2">Sair</button></a>  
+          </div>
+
+
+        </div>
+      </div>
+    </header>
+
+
+
+          <% } else if(user && user.userType === 'admin') {%>
+
+          <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle px-2 text-white" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Chamados
+              </a>
+              <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
+                <li><a href="/chamadosADM" class="dropdown-item nav-link px-2 text-white">Todos os Chamados</a></li>
+                <li><a href="/chamados" class="dropdown-item nav-link px-2 text-white">Abrir chamado</a></li>
+                <li><a href="/chamadosAtivos" class="dropdown-item nav-link px-2 text-white">Meus Chamados</a></li>
+                <li><a href="/chamadosFinalizados" class="dropdown-item nav-link px-2 text-white">Chamados Finalizados</a></li>
+              </ul>
+            </li>
+
+
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle px-2 text-white" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Usuários
+              </a>
+              <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
+                <li><a class="dropdown-item nav-link px-2 text-white" href="/user">Lista de usuários</a></li>
+                <li><a href="/register" class="dropdown-item nav-link px-2 text-white">Cadastrar usuário</a></li>
+              </ul>
+            </li>
+        
+          </ul>
+
+            <div class="text-end">
+              <button type="button" class="btn btn-outline-light me-2 disabled">Perfil</button>
+              <a href="/login/logout"><button type="button" class="btn btn-outline-light me-2">Sair</button></a>  
+            </div>
+          </div>
+        </div>
+      </header>
+
+
+
+
+        <% } else {%>
+          <div class="text-end" style="width: 100%;">
+            <a href="/login"><button type="button" class="btn btn-outline-light me-2">Login</button></a>
+            <a href="/register"><button type="button" class="btn btn-success">Criar conta</button></a>
+          </div>
+
+      </div>
+      </header>
+
+      <% } %>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

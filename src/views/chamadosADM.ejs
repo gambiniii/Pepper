@@ -1,0 +1,173 @@
+<%- include('includes/head') %>
+<%- include('includes/nav') %>
+<body>
+  <section class="my-5">
+    <h1 class="lead">
+      Chamados Ativos
+    </h1>
+    <%- include('includes/messages') %>
+
+
+<!-------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+
+<!-- TABELAS ADM -->
+
+<!-- CHAMADOS ATRIBUÍDOS A VOCÊ -->
+<div>
+    <div style="display: flex; font-size: 16px;">
+        <h4 style="margin-left: 5%;">CHAMADOS ATRIBUÍDOS A VOCÊ</h4>
+
+        <h4 style="margin-left: 20%;">CHAMADOS SEM ATRIBUIÇÃO</h4>    
+    </div>
+
+    <div style="display: flex; padding: 3%; padding-top: 0; height: 240px;">
+
+
+    <table>
+      <thead>
+          <tr>
+              <th>Assunto</th>
+              <th>Solicitante</th>
+              <th>Data Abertura</th>
+              <th>STATUS</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% chamados.forEach(ticket => { %>
+              <% if(ticket.idResponsavel === user._id && ticket.status !== 'Finalizado' && ticket.status !== 'Resolvido') { %>
+                  <tr>
+                  <td>
+                      <a href="/chamadosAtivos/tk/<%= ticket._id %>" style="text-decoration: none;">
+                      <%= ticket.assunto %>
+                      </a>
+                  </td>
+                  <td><%= ticket.nomeSolicitante %></td>
+                  <td><%= ticket.dataAbertura %></td>
+                  <td><%= ticket.status %></td>
+                  </tr>
+              <%  } %>
+          <%  }) %>
+
+
+        </tbody>
+    </table>
+<!-------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+    
+<!-- CHAMADOS SEM ATRIBUIÇÃO -->
+    <table>
+      <thead>
+          <tr>
+              <th>Assunto</th>
+              <th>Solicitante</th>
+              <th>Data Abertura</th>
+              <th>STATUS</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% chamados.forEach(ticket => { %>
+              <% if(ticket.idResponsavel === null && ticket.status !== 'Finalizado' && ticket.status !== 'Resolvido') { %>
+                  <tr>
+                  <td>
+                      <a href="/chamadosAtivos/tk/<%= ticket._id %>" style="text-decoration: none;">
+                      <%= ticket.assunto %>
+                      </a>
+                  </td>
+                  <td><%= ticket.nomeSolicitante %></td>
+                  <td><%= ticket.dataAbertura %></td>
+                  <td><%= ticket.status %></td>
+                  </tr>
+              <%  } %>
+          <%  }) %>
+
+
+        </tbody>
+    </table>
+
+</div>
+
+<!-------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+
+
+<!-- CHAMADOS ATRIBUÍDOS À OUTROS AGENTES -->
+<div style="display: flex; margin-top: 3%;">
+    <h4 style="margin-left: 5%;">CHAMADOS ATRIBUÍDOS À OUTROS AGENTES</h4>
+
+    <h4 style="margin-left: 9%;">CHAMADOS RESOLVIDOS</h4>    
+</div>
+
+
+<div style="display: flex; padding: 3%; padding-top: 0; height: 240px;">
+
+    <table>
+      <thead>
+          <tr>
+              <th>Assunto</th>
+              <th>Solicitante</th>
+              <th>Data Abertura</th>
+              <th>STATUS</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% chamados.forEach(ticket => { %>
+              <% if(ticket.idResponsavel !== user._id && ticket.idResponsavel !== null && ticket.status !== 'Finalizado') { %>
+                  <tr>
+                  <td>
+                      <a href="/chamadosAtivos/tk/<%= ticket._id %>" style="text-decoration: none;">
+                      <%= ticket.assunto %>
+                      </a>
+                  </td>
+                  <td><%= ticket.nomeSolicitante %></td>
+                  <td><%= ticket.dataAbertura %></td>
+                  <td><%= ticket.status %></td>
+                  </tr>
+              <%  } %>
+          <%  }) %>
+
+
+        </tbody>
+    </table>
+
+
+<!-------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+
+
+<!-- CHAMADOS RESOLVIDOS -->
+    <table>
+      <thead>
+          <tr>
+              <th>Assunto</th>
+              <th>Solicitante</th>
+              <th>Data Abertura</th>
+              <th>STATUS</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% chamados.forEach(ticket => { %>
+              <% if(ticket.status === 'Resolvido') { %>
+                  <tr>
+                  <td>
+                      <a href="/chamadosAtivos/tk/<%= ticket._id %>" style="text-decoration: none;">
+                      <%= ticket.assunto %>
+                      </a>
+                  </td>
+                  <td><%= ticket.nomeSolicitante %></td>
+                  <td><%= ticket.dataAbertura %></td>
+                  <td><%= ticket.status %></td>
+                  </tr>
+              <%  } %>
+          <%  }) %>
+
+
+        </tbody>
+    </table>
+</div>
+
+        
+</div>
+
+
+    
+  </section>
+
+
+  <%- include('includes/footer') %>

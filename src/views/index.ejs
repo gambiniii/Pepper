@@ -1,0 +1,39 @@
+<%- include('includes/head') %>
+<%- include('includes/nav') %>
+
+
+
+<body>
+  <img style="margin-left: 31%; width: 500px; position: absolute; left: 10px; opacity: 13%; z-index: 0;" src="https://images.vexels.com/media/users/3/236746/isolated/lists/4691ac3565ddf36c551c64017d97d343-frutas-e-vegetais-cor-3.png" alt="pimenta">
+
+
+  <div style="margin-top: 5%; z-index: 1;">
+    <ul class="index" style="align-items: center;">
+      <% if(user) { %>
+        <% if(user.userType === 'admin') { %>
+
+          <li><a href="/chamadosADM">Todos os Chamados</a></li>
+          <li><a href="/chamados">Abrir Chamado</a></li>
+          <li><a href="/chamadosFinalizados">Chamados Finalizados</a></li>
+          <li><a href="/user">Usuários</a></li>
+          <li><a href="/register">Cadastrar novo usuário</a></li>
+        </ul>
+
+        <% } else if (user.userType === 'default'){ %>
+            <li style="margin-top: 11%;"><a href="/chamados">Abrir Chamado</a></li>
+            <li><a href="/chamadosAtivos">Meus Chamados</a></li>
+          </ul>
+          <% } %>
+        <% } else { %>
+          <p style="font-size: 36px; margin-top: 12%; font-family: sans-serif; z-index: 1;"">
+            Para usar o Pepper, <a href="/login" style="color:#ff4b44;"> faça login</a>  ou <a href="/register" style="color:#3eac7f;"> crie sua conta</a>  gratuitamente!
+          </p>
+        <% } %>
+
+  
+  </div>
+
+
+  </section>
+
+  <%- include('includes/footer') %>

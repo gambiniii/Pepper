@@ -1,0 +1,419 @@
+*{
+  font-family: 'Open Sans';
+  color: #FFF;
+}
+
+@-webkit-keyframes swing
+{
+    15%
+    {
+        -webkit-transform: translateX(5px);
+        transform: translateX(5px);
+    }
+    30%
+    {
+        -webkit-transform: translateX(-5px);
+       transform: translateX(-5px);
+    } 
+    50%
+    {
+        -webkit-transform: translateX(3px);
+        transform: translateX(3px);
+    }
+    65%
+    {
+        -webkit-transform: translateX(-3px);
+        transform: translateX(-3px);
+    }
+    80%
+    {
+        -webkit-transform: translateX(2px);
+        transform: translateX(2px);
+    }
+    100%
+    {
+        -webkit-transform: translateX(0);
+        transform: translateX(0);
+    }
+}
+@keyframes swing
+{
+    15%
+    {
+        -webkit-transform: translateX(5px);
+        transform: translateX(5px);
+    }
+    30%
+    {
+        -webkit-transform: translateX(-5px);
+        transform: translateX(-5px);
+    }
+    50%
+    {
+        -webkit-transform: translateX(3px);
+        transform: translateX(3px);
+    }
+    65%
+    {
+        -webkit-transform: translateX(-3px);
+        transform: translateX(-3px);
+    }
+    80%
+    {
+        -webkit-transform: translateX(2px);
+        transform: translateX(2px);
+    }
+    100%
+    {
+        -webkit-transform: translateX(0);
+        transform: translateX(0);
+    }
+}
+
+@keyframes fadein {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* Firefox < 16 */
+@-moz-keyframes fadein {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* Safari, Chrome and Opera > 12.1 */
+@-webkit-keyframes fadein {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* Internet Explorer */
+@-ms-keyframes fadein {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* Opera < 12.1 */
+@-o-keyframes fadein {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/*
+=======================================================================================================================================================================================
+*/
+
+
+.errorText{
+    font-size: 10px;
+    color: red;
+    text-align: start;
+    position: absolute;
+
+    animation: fadein 0.5s, swing 1s;
+    -webkit-animation: swing 1s,  fadein 0.5s ease;
+    -webkit-animation-iteration-count: 1;
+    animation-iteration-count: 1;
+}
+
+
+
+
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,700&display=swap');
+:root {
+  --primary-color: #198754;
+  --primary-color-darker: #147045;
+}
+
+* {
+  box-sizing: border-box;
+  outline: 0;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Open sans', sans-serif;
+  font-size: 1.3em;
+  line-height: 1.5em;
+}
+
+form input, form label, form button {
+  display: block;
+  width: 100%;
+}
+
+
+form button {
+  border: none;
+  background: var(--primary-color);
+  color: #fff;
+  font-size: 18px;
+  font-weight: 700;
+  height: 50px;
+  cursor: pointer;
+  margin-top: 30px;
+}
+
+form button:hover {
+  background: var(--primary-color-darker);
+}
+
+.formulario{
+  background-color: #181818;
+  border: none;
+  color: #fff;
+  display: block;
+  width: 100%;
+  padding: .375rem 0.75rem;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  border-radius: 0.25rem;
+}
+
+.form-group label{
+  text-align: start;
+}
+
+.serverError{
+  font-size: 18px;
+  color: red;
+  text-align: center;
+  height: 0;
+
+  animation: fadein 1s;
+  -webkit-animation: fadein 1s ease;
+}
+
+.serverSuccess{
+  font-size: 18px;
+  color: #29c97f;
+  text-align: center;
+  height: 0;
+
+  animation: fadein 1s;
+  -webkit-animation: fadein 1s ease;
+}
+
+.desc{
+  width: 100%;
+  border: 1px solid #ced4da;
+  padding: 0.375rem 0.75rem;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #212529;
+  background-color: #fff;
+  background-clip: padding-box;
+  appearance: none;
+  border-radius: 0.25rem;
+}
+
+.description{
+  border-radius: 0.50rem;
+  background-color: #17171a;
+  width: 100%;
+}
+
+
+
+.table-striped th, .table-striped td{
+  text-align: center;
+}
+
+.header-tk{
+  background-color: #212529;
+  color: #FFF;
+  border-radius: 0.50rem;
+}
+
+.header-tk h6{
+  margin-left: 2%;
+}
+
+.header-andamento p{
+  font-size: 16px;
+  margin-bottom: 0;
+  white-space: pre-line; 
+  word-break: break-word;
+  line-height: normal;
+  margin: 1%;
+}
+
+.header-andamento h6{
+  font-size: 0.90rem;
+  margin-bottom: 0;
+}
+
+.header-andamento{
+  padding: 0;
+  min-height: 150px;
+  border-top: 0;
+}
+
+.header-andamento, .header-tk{
+  border: rgba(0, 0, 0, 0.205) 1px solid;
+  border-radius: 0.50rem;
+  
+  
+}
+
+.header-atividade{
+  background-color: #212529;
+  color: #fff;
+  margin: 0;
+  border-top-left-radius: 0.5rem;
+  border-top-right-radius: 0.5rem;
+  height: 40px;
+  width: 100.2%;
+  border-bottom: 1px solid #797979;
+}
+
+.form-check-input:checked{
+  background-color: #3f8755;
+  border-color: #3f8755;
+}
+
+.ticket-botoes .btn-tkAdmin{
+  width: 30%;
+  margin-left: 1.5%;
+  margin-right: 1.5%;
+}
+
+.categoria{
+  background-color: #17171a;
+  color: #fff;
+  display: block;
+  width: 100%;
+  padding: 0.375rem 2.25rem 0.375rem 0.75rem;
+  -moz-padding-start: calc(0.75rem - 3px);
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  background-repeat: no-repeat;
+  background-position: right 0.75rem center;
+  background-size: 16px 12px;
+  border-radius: 0.25rem;
+}
+
+
+table{
+  width: 100%;
+  border-collapse: collapse;
+  text-align: center;
+  margin-bottom: 3%;
+  margin-top: 0;
+  margin: 2%;
+  display: flex;
+  flex-flow: column;
+  font-size: 13px;
+  height: 200px;
+  }
+
+  table thead{
+    flex: 0 0 auto;
+  }
+
+  table tbody {
+    flex: 1 1 auto;
+    display: block;
+    overflow-y: scroll;
+  }
+
+  table tbody tr {
+  width: 100%;
+  }
+
+  table thead, table tbody tr {
+    display: table;
+    table-layout: fixed;
+  }
+
+
+  thead{
+  background-color: #3fad80;
+  color: #fff;
+  height: 40px;
+  width: 100%;
+  }
+
+  tbody{
+  background-color: #1b2025;
+
+  }
+
+  tbody tr:nth-child(even){
+  background-color: #21272d;
+  }
+
+  tbody tr:hover{
+  background-color: #37414b;
+  color: #fff;
+  }
+
+  a{
+    color: #fff;
+  }
+
+  a:hover{
+      color: #ff4b44;
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+  @import url("https://fonts.googleapis.com/css?family=Raleway:400,400i,700");
+body {
+  height: 100vh;
+  background: #1A1E23;
+}
+
+.index {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  list-style-type: none;
+}
+.index li {
+  padding: 6px 0;
+}
+.index li a {
+  --fill-color: #3fad80;
+  position: relative;
+  display: block;
+  padding: 4px 0;
+  font: 700 2.5rem Raleway, sans-serif;
+  text-decoration: none;
+  text-transform: uppercase;
+  -webkit-text-stroke: 2px var(--fill-color);
+  background: linear-gradient(var(--fill-color) 0 100%) left/0 no-repeat;
+  color: transparent;
+  -webkit-background-clip: text;
+          background-clip: text;
+  transition: 0.5s linear;
+}
+.index li a:hover {
+  background-size: 100%;
+}
+
+
+
+
+
+
+
+
+  

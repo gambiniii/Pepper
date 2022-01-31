@@ -1,0 +1,17 @@
+<% if(errors.length > 0) { %>
+  <div class="serverError">
+    <% errors.forEach(erro => { %>
+      <p style="margin: 0;"><%= erro %></p>
+    <% }); %>
+  </div>
+<% } %>
+
+
+<% if(success.length > 0) { %>
+  <div class="serverSuccess">
+    <% success.forEach(success => { %>
+      <p style="margin: 0;"><%= success %></p>
+    <% }); %>
+  </div>
+<% } %>
+

@@ -1,0 +1,52 @@
+<%- include('includes/head') %>
+<%- include('includes/nav') %>
+<body>
+  <section class="container my-5">
+    <h1 class="lead">
+      Abrir chamado:
+    </h1>
+    <%- include('includes/messages') %>
+
+
+    <form action="/chamados/abrirChamado" method="POST" class="form-chamado">
+      <div class="row my-4">
+        <div class="col-md-6" align="center">
+
+          <input type="hidden" name="_csrf" value="<%= csrfToken%>">
+
+          <div class="form-group mt-2" style="width: 80%;">
+            <label class="lead">Categoria</label>
+            <select class="categoria" name="categoria">
+              <option selected>- Selecione -</option>
+              <option value="Duvida">Dúvida</option>
+              <option value="Incidente">Incidente</option>
+              <option value="Servico">Solicitação de Serviço</option>
+            </select>
+          </div>
+
+          <div class="form-group mt-3" style="width: 80%;">
+            <label class="lead">Assunto</label>
+            <input type="text" class="formulario" name="assunto" maxlength="30">
+          </div>
+          
+          <button type="submit" class="btn btn-success" style="width: 80%; margin-left: 0.5%; margin-top: 6%;">Abrir chamado</button>
+        
+        </div>
+
+        <div class="col-md-6" align="center">
+          <div class="form-group mt-2" style="width:80%;">
+            <label class="lead">Descrição</label>
+            <textarea class="formulario description" rows="8" maxlength="1000" name="descricao"></textarea>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+  </div>
+  </form>
+
+
+    
+  </section>
+
+  <%- include('includes/footer') %>

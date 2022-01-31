@@ -1,0 +1,44 @@
+<%- include('includes/head') %>
+<%- include('includes/nav') %>
+<body>
+  <section class="container my-5">
+    <h1 class="lead">
+      Chamados Finalizados
+    </h1>
+    <%- include('includes/messages') %>
+
+
+    <table>
+      <thead>
+        <tr>
+          <th scope="col">Assunto</th>
+          <th scope="col">Responsável</th>
+          <th scope="col">Data Abertura</th>
+          <th scope="col">Última Atualização</th>
+          <th scope="col">STATUS</th>
+        </tr>
+      </thead>
+      <tbody>
+      <% chamados.forEach(chamado => { %>
+        <% const ultimaAtt = chamado.atividade.length - 1 %>
+        <% if(chamado.status === 'Finalizado') { %>
+        <tr>
+            <td> 
+              <a href="/chamadosAtivos/tk/<%= chamado._id %>">
+                <%= chamado.assunto %> 
+              </a>
+          </td>
+          <td> <%= chamado.nomeResponsavel %> </td>
+          <td> <%= chamado.dataAbertura %> </td>
+          <td> <%= chamado.atividade[ultimaAtt].dataPostagem %> </td>
+          <td> <%= chamado.status %> </td>
+        </tr>
+      <% }; %>
+      <% }) %>
+        
+      </tbody>
+    </table>
+  </section>
+
+
+  <%- include('includes/footer') %>
